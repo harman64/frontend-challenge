@@ -29,6 +29,7 @@ body {
     @extend %center;
     flex-direction: column;
     height: 100%;
+    user-select: none;
 
     .content--top,
     .content--bottom {
