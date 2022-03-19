@@ -1,3 +1,6 @@
+@import './placeholders.scss';
+@import './mixins.scss';
+
 body {
   margin: 0;
   padding: 0;
@@ -10,13 +13,65 @@ body {
   overflow: hidden;
 
   .slider__wrapper,
-  .slider__page {
+  .slider__page--gradients,
+  .slider__page--presets,
+  .slider__page--colors {
     position: absolute;
     width: 100%;
     height: 100%;
   }
+}
 
-  .slider__wrapper {
-    transition: transform linear 0.3s;
+.slider__wrapper {
+  transition: transform linear 0.3s;
+
+  .slider__content {
+    @extend %center;
+    flex-direction: column;
+    height: 100%;
+
+    .content--top,
+    .content--bottom {
+      flex: 1;
+      @extend %center;
+      flex-direction: column;
+      width: 100%;
+    }
   }
+
+  .content--bottom {
+    .material-icons {
+      color: #ffffff;
+      font-size: 48px;
+    }
+  }
+
+  .slide-number {
+    @extend %center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    color: #ffffff;
+  }
+
+  h1 {
+    margin: 10px;
+  }
+
+  .subtitle {
+    font-size: 18px;
+    color: #b1b1b1;
+  }
+}
+
+.slider__page--gradients {
+  @include gradient-bg-image(#6a1ddc, #15e2fc);
+}
+
+.slider__page--presets {
+  @include gradient-bg-image(#15e2fc, #f8e000);
+}
+
+.slider__page--colors {
+  @include gradient-bg-image(#f8e000, #ff2d80);
 }

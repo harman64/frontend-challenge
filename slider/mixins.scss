@@ -1,0 +1,6 @@
+@mixin gradient-bg-image($left, $right) {
+  .content--bottom,
+  .slide-number {
+    background-image: linear-gradient(to right, $left, $right);
+  }
+}
