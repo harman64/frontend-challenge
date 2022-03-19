@@ -1,0 +1,47 @@
+@import './placeholders.scss';
+
+$wrapper-padding: 10px;
+
+body {
+  padding: 0;
+  margin: 0;
+}
+
+.puzzle-figure {
+  width: 320px;
+  height: 320px;
+  background-color: #000000;
+  border-radius: 10px;
+  padding: $wrapper-padding;
+  position: relative;
+}
+
+.puzzle {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  position: absolute;
+  width: calc(100% - (2 * #{$wrapper-padding}));
+  height: calc(100% - (2 * #{$wrapper-padding}));
+  z-index: 1;
+
+  .tile {
+    @extend %center;
+    background-color: #ffffff;
+    font-size: 36px;
+    position: relative;
+    margin: 10px;
+
+    &:after {
+      content: ' ';
+      width: calc(100% + 20px);
+      height: calc(100% + 20px);
+      background-image: linear-gradient(135deg, #cccccc 50%, #787878 50%);
+      position: absolute;
+      z-index: -1;
+    }
+  }
+}
