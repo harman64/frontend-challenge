@@ -12,5 +12,6 @@ module.exports = {
       'always',
       { exceptAfterSingleLine: true },
     ],
+    'no-plusplus': ['error', { allowForLoopAfterthoughts: true }],
   },
 };
