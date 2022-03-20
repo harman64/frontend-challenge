@@ -11,6 +11,8 @@ class Puzzle {
     ['7', '8', '0'],
   ];
 
+  gridSize = 3; // since it is an 8 puzzle problem
+
   constructor(goalState, tiles) {
     this.tiles = tiles;
     this.goalState = goalState;
@@ -55,14 +57,13 @@ class Puzzle {
   // Used to fetch the clickable elements surrounding the empty cell
   #getAdjacentElements() {
     const draggableElements = [];
-    const gridSize = Math.sqrt(this.puzzle.length); // 3
     for (let i = this.emptyRowIndex - 1; i < this.emptyRowIndex + 2; i++) {
       for (
         let j = this.emptyColumnIndex - 1;
         j < this.emptyColumnIndex + 2;
         j++
       ) {
-        if (i > -1 && j > -1 && i < gridSize && j < gridSize) {
+        if (i > -1 && j > -1 && i < this.gridSize && j < this.gridSize) {
           if (
             (i === this.emptyRowIndex || j === this.emptyColumnIndex) &&
             !(i === this.emptyRowIndex && j === this.emptyColumnIndex)
@@ -77,9 +78,8 @@ class Puzzle {
   }
 
   #getXYIndicesOfSelectedTile(tileText) {
-    const gridSize = Math.sqrt(this.puzzle.length);
-    for (let i = 0; i < gridSize; i++) {
-      for (let j = 0; j < gridSize; j++) {
+    for (let i = 0; i < this.gridSize; i++) {
+      for (let j = 0; j < this.gridSize; j++) {
         if (this.puzzleGrid[i][j] === tileText) {
           return { row: i, col: j };
         }
@@ -107,6 +107,11 @@ class Puzzle {
       this.emptyRowIndex = row;
       this.emptyColumnIndex = col;
 
+      if (this.#checkSolution()) {
+        // eslint-disable-next-line no-alert
+        setTimeout(() => alert('You Won!'), 0);
+      }
+
       this.#setClickHandlers();
     }
   }
@@ -132,6 +137,19 @@ class Puzzle {
       }
     });
   }
+
+  #checkSolution = () => {
+    let index = 0;
+    for (let i = 0; i < this.gridSize; i++) {
+      for (let j = 0; j < this.gridSize; j++) {
+        if (this.puzzleGrid[i][j] !== this.goalState[index]) {
+          return false;
+        }
+        index += 1;
+      }
+    }
+    return true;
+  };
 }
 
 const tiles = document.querySelectorAll('.tile');
