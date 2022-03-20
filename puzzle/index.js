@@ -122,6 +122,7 @@ class Puzzle {
 
     this.tiles.forEach(tile => {
       if (elements.includes(tile.innerText)) {
+        tile.style.cursor = 'pointer';
         tile.addEventListener('click', self.clickHandler);
       }
     });
@@ -133,6 +134,7 @@ class Puzzle {
 
     this.tiles.forEach(tile => {
       if (elements.includes(tile.innerText)) {
+        tile.style.cursor = 'default';
         tile.removeEventListener('click', self.clickHandler);
       }
     });

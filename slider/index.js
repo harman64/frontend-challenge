@@ -64,6 +64,8 @@ class Slider {
     this.isDown = true;
     const { transform } = this.slider.style;
     this.offsetLeft = transform ? getIntValueOf(transform) : 0;
+
+    this.slider.style.cursor = 'grabbing';
   }
 
   onTouchStart(e) {
@@ -79,6 +81,8 @@ class Slider {
     // reset values
     this.startX = null;
     this.isDown = false;
+
+    this.slider.style.cursor = 'default';
   }
 
   onTouchEnd(e) {
