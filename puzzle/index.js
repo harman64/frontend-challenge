@@ -158,3 +158,5 @@ const tiles = document.querySelectorAll('.tile');
 const puzzle = new Puzzle(['1', '2', '3', '4', '5', '6', '7', '8', '0'], tiles);
 
 puzzle.init();
+
+window.shuffle = puzzle.init.bind(puzzle);
