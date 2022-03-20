@@ -25,6 +25,7 @@ class Puzzle {
     }
 
     this.#drawGrid();
+    this.#setClickHandlers();
   }
 
   #drawGrid() {
@@ -41,6 +42,42 @@ class Puzzle {
       } else {
         this.emptyRowIndex = row;
         this.emptyColumnIndex = col;
+      }
+    });
+  }
+
+  // Used to fetch the clickable elements surrounding the empty cell
+  #getAdjacentElements() {
+    const draggableElements = [];
+    const gridSize = Math.sqrt(this.puzzle.length); // 3
+    for (let i = this.emptyRowIndex - 1; i < this.emptyRowIndex + 2; i++) {
+      for (
+        let j = this.emptyColumnIndex - 1;
+        j < this.emptyColumnIndex + 2;
+        j++
+      ) {
+        if (i > -1 && j > -1 && i < gridSize && j < gridSize) {
+          if (
+            (i === this.emptyRowIndex || j === this.emptyColumnIndex) &&
+            !(i === this.emptyRowIndex && j === this.emptyColumnIndex)
+          ) {
+            draggableElements.push(this.puzzleGrid[i][j]);
+          }
+        }
+      }
+    }
+
+    return draggableElements;
+  }
+
+  #setClickHandlers() {
+    const elements = this.#getAdjacentElements();
+
+    this.tiles.forEach(tile => {
+      if (elements.includes(tile.innerText)) {
+        tile.addEventListener('click', () => {
+          // handleClick here
+        });
       }
     });
   }
